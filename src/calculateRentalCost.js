@@ -3,20 +3,32 @@
  *
  * @return {number}
  */
+/**
+ * Обчислює вартість оренди авто з урахуванням знижок.
+ * @param {number} days
+ * @return {number}
+ */
+
 const DAILY_RATE = 40;
 
-function calculateRentalCost(days) {
-  let discount = 0;
+const LONG_TERM = 7;
+const MID_TERM = 3;
 
-  if (days >= 7) {
-    discount = 50;
-  } else if (days >= 3) {
-    discount = 20;
+const LONG_TERM_DISCOUNT = 50;
+const MID_TERM_DISCOUNT = 20;
+
+function calculateRentalCost(days) {
+  const base = days * DAILY_RATE;
+
+  if (days >= LONG_TERM) {
+    return base - LONG_TERM_DISCOUNT;
   }
 
-  const total = days * DAILY_RATE - discount;
+  if (days >= MID_TERM) {
+    return base - MID_TERM_DISCOUNT;
+  }
 
-  return total;
+  return base;
 }
 
 module.exports = calculateRentalCost;
